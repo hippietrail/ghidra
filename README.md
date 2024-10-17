@@ -19,6 +19,7 @@
 - Add a way for FileSystems to inform the UI about filetypes.  
   Currently it depends solely on the file extension. But many filesystems have filetype info in the binary structure.
   - Discussion: [6953][d6953]
+  - Pull request: [7062][pr7062]
 
   ---
 
@@ -26,5 +27,6 @@
 
 [d6953]: https://github.com/NationalSecurityAgency/ghidra/discussions/6953
 [d6992]: https://github.com/NationalSecurityAgency/ghidra/discussions/6992
+[pr7062]: https://github.com/NationalSecurityAgency/ghidra/pull/7062
 [readme_orig]: README_orig.md
 [scalar_java]: https://github.com/hippietrail/ghidra/blob/master/Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/scalar/Scalar.java#L286
