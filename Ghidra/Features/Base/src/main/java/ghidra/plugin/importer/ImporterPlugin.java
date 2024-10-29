@@ -460,6 +460,7 @@ public class ImporterPlugin extends Plugin
 			chooser = new GhidraFileChooser(tool.getActiveWindow());
 			chooser.addFileFilter(ImporterUtilities.LOADABLE_FILES_FILTER);
 			chooser.addFileFilter(ImporterUtilities.CONTAINER_FILES_FILTER);
+			chooser.addFileFilter(ImporterUtilities.COMBINED_FILES_FILTER);
 			chooser.setSelectedFileFilter(GhidraFileFilter.ALL);
 		}
 		chooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);

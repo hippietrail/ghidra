@@ -56,6 +56,12 @@ import util.CollectionUtils;
  * from a background task.
  */
 public class ImporterUtilities {
+	
+	private static final String[] loadableFileExtensions = { "exe", "dll", "obj", "drv", "bin",
+		"hex", "o", "a", "so", "class", "lib", "dylib", "bundle", "jnilib" };
+
+	private static final String[] containerFileExtensions = { "zip", "tar", "tgz", "jar", "gz",
+		"ipsw", "img3", "dmg", "apk", "cpio", "rpm", "lib" };
 
 	/**
 	 * File extension filter for well known 'loadable' files for GhidraFileChoosers.
@@ -63,7 +69,7 @@ public class ImporterUtilities {
 	 * TODO: will be refactored to use file_extension_icon.xml file info.
 	 */
 	public static final GhidraFileFilter LOADABLE_FILES_FILTER = ExtensionFileFilter.forExtensions(
-		"Loadable files", "exe", "dll", "obj", "drv", "bin", "hex", "o", "a", "so", "class", "lib");
+		"Loadable files", loadableFileExtensions);
 
 	/**
 	 * File extension filter for well known 'container' files for GhidraFileChoosers.
@@ -71,9 +77,24 @@ public class ImporterUtilities {
 	 * TODO: will be refactored to use file_extension_icon.xml file info.
 	 */
 	public static final GhidraFileFilter CONTAINER_FILES_FILTER =
-		ExtensionFileFilter.forExtensions("Container files", "zip", "tar", "tgz", "jar", "gz",
-			"ipsw", "img3", "dmg", "apk", "cpio", "rpm", "lib");
-
+		ExtensionFileFilter.forExtensions("Container files", containerFileExtensions);
+	
+	public static final String[] combinedFileExtensions;
+	
+	public static final GhidraFileFilter COMBINED_FILES_FILTER;
+	
+	static {
+		combinedFileExtensions = new String[loadableFileExtensions.length +
+			containerFileExtensions.length];
+		System.arraycopy(loadableFileExtensions, 0, combinedFileExtensions, 0,
+			loadableFileExtensions.length);
+		System.arraycopy(containerFileExtensions, 0, combinedFileExtensions,
+			loadableFileExtensions.length, containerFileExtensions.length);
+		
+		COMBINED_FILES_FILTER = ExtensionFileFilter.forExtensions("Loadable and container files",
+			combinedFileExtensions);
+	}
+	
 	private static final FileSystemService fsService = FileSystemService.getInstance();
 
 	static List<LanguageCompilerSpecPair> getPairs(Collection<LoadSpec> loadSpecs) {
