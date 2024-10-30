@@ -13,12 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-apply from: "$rootProject.projectDir/gradle/javaProject.gradle"
-apply plugin: 'eclipse'
-eclipse.project.name = '_MarkdownSupport'
+package ghidra.app.plugin.core.search;
 
-dependencies {
-	implementation 'org.commonmark:commonmark:0.23.0'
-	implementation 'org.commonmark:commonmark-ext-heading-anchor:0.23.0'
-	implementation 'org.commonmark:commonmark-ext-footnotes:0.23.0'
+import ghidra.framework.plugintool.ServiceProvider;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.listing.Program;
+import ghidra.util.table.ProgramLocationTableRowMapper;
+
+public class TextMatchToAddressTableRowMapper
+		extends ProgramLocationTableRowMapper<TextMatch, Address> {
+
+	@Override
+	public Address map(TextMatch rowObject, Program data, ServiceProvider serviceProvider) {
+		return rowObject.getAddress();
+	}
 }
