@@ -403,6 +403,7 @@ public class BatchImportDialog extends DialogComponentProvider {
 		chooser.setFileSelectionMode(GhidraFileChooserMode.FILES_AND_DIRECTORIES);
 		chooser.addFileFilter(ImporterUtilities.LOADABLE_FILES_FILTER);
 		chooser.addFileFilter(ImporterUtilities.CONTAINER_FILES_FILTER);
+		chooser.addFileFilter(ImporterUtilities.COMBINED_FILES_FILTER);
 		chooser.setSelectedFileFilter(GhidraFileFilter.ALL);
 
 		chooser.setLastDirectoryPreference(LAST_IMPORT_DIR);
