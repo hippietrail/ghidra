@@ -23,6 +23,9 @@
   - Pull request: [7062][pr7062]
  
 - Add support for A-line and F-line traps, used in various ways, by Motorola 680x0 platforms.
+  - March 2019 issue: [140][i140]
+  - April 2019 issue: [487][i487]
+  - Pull request: [7126][pr7126]
 
   ---
 
@@ -31,5 +34,8 @@
 [d6953]: https://github.com/NationalSecurityAgency/ghidra/discussions/6953
 [d6992]: https://github.com/NationalSecurityAgency/ghidra/discussions/6992
 [pr7062]: https://github.com/NationalSecurityAgency/ghidra/pull/7062
+[pr7126]: https://github.com/NationalSecurityAgency/ghidra/pull/7126
+[i140]: https://github.com/NationalSecurityAgency/ghidra/issues/140
+[i487]: https://github.com/NationalSecurityAgency/ghidra/issues/487
 [readme_orig]: README_orig.md
 [scalar_java]: https://github.com/hippietrail/ghidra/blob/master/Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/scalar/Scalar.java#L286
