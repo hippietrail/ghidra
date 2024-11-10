@@ -12,7 +12,7 @@
 - Add support for Options in FileSystems similar to what we have for Loaders.
   - Option for including the headers or not.
     - This is probably better handled in each individual Loader. But see the following bullet point.
-  - Choice or format for 'wrapping' files that have extra info in the filesystem outside the file but necessary or useful for disassembly.
+  - Choice of format for 'wrapping' files that have extra info in the filesystem outside the file but necessary or useful for disassembly.
     - Apple II has a choice of MacBinaryII headers and NAPS filename extensions.
     - Commodore 64 has X00/P00 filename extensions.
     - TI-99/4A has a choice of two 128-byte headers: FIAD (V9T9) and TIFILES (XMODEM).
