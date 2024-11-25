@@ -216,8 +216,9 @@ public class KeyBindingOverrideKeyEventDispatcher implements KeyEventDispatcher 
 			KeyStroke keyStroke = KeyStroke.getKeyStrokeForEvent(event);
 
 			// note: this call has no effect if 'action' is null
-			SwingUtilities.notifyAction(action, keyStroke, event, event.getSource(),
-				event.getModifiersEx());
+			Object source = event.getSource();
+			int modifiersEx = event.getModifiersEx();
+			SwingUtilities.notifyAction(action, keyStroke, event, source, modifiersEx);
 
 		}
 		return wasInProgress;
@@ -240,7 +241,16 @@ public class KeyBindingOverrideKeyEventDispatcher implements KeyEventDispatcher 
 			// processed with modal dialogs open.  For now, do not let key bindings get processed
 			// for modal dialogs.  This can be changed in the future if needed.
 			DockingDialog dialog = (DockingDialog) activeWindow;
-			return !dialog.isModal();
+			if (!dialog.isModal()) {
+				return true;
+			}
+
+			// Allow modal dialogs to process close keystrokes (e.g., ESCAPE) so they can be closed
+			DialogComponentProvider provider = dialog.getComponent();
+			if (provider.isCloseKeyStroke(keyStroke)) {
+				return true;
+			}
+			return false; // modal dialog; non-escape key
 		}
 		return true; // default case; allow it through
 	}
@@ -274,6 +284,15 @@ public class KeyBindingOverrideKeyEventDispatcher implements KeyEventDispatcher 
 		// if (!textComponent.isEditable()) {
 		//	return false;
 		// }
+
+		// Special Case: We allow Escape to go through.  This doesn't seem useful to text widgets
+		// but does allow for closing of windows.   If we find text widgets that need Escape, then 
+		// we will have to update how we make this decision, such as by having the concerned text
+		// widgets register actions for Escape and then check for that action.
+		int code = event.getKeyCode();
+		if (code == KeyEvent.VK_ESCAPE) {
+			return false;
+		}
 
 		// We've made the executive decision to allow all keys to go through to the text component
 		// unless they are modified with the 'Alt'/'Ctrl'/etc keys, unless they directly used
